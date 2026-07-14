@@ -63,8 +63,30 @@
         </div>
         <div>
           <label class="block text-sm text-gray-600 mb-1">หน่วยงานที่ส่งปรึกษา <span class="text-red-500">*</span></label>
-          <input type="text" name="department" required placeholder="เช่น อายุรกรรม, ศัลยกรรม"
-                 class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
+          <select name="department" required
+                  class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none bg-white text-gray-800">
+            <option value="">-- เลือกหน่วยงาน --</option>
+            <option value="ER (อุบัติเหตุฉุกเฉิน)">ER (อุบัติเหตุฉุกเฉิน)</option>
+                <option value="OPD (Med)">OPD (Med)</option>
+                <option value="OPD (กุมาร)">OPD (กุมาร)</option>
+                <option value="OPD (จิตเวช)">OPD (จิตเวช)</option>
+                <option value="OPD (ออร์โธ)">OPD (ออร์โธ)</option>
+                <option value="IPD (อายุรกรรมชาย)">IPD (อายุรกรรมชาย)</option>
+                <option value="IPD (อายุรกรรมหญิง)">IPD (อายุรกรรมหญิง)</option>
+                <option value="IPD (ศัลยกรรมชาย)">IPD (ศัลยกรรมชาย)</option>
+                <option value="IPD (ศัลยกรรมหญิง)">IPD (ศัลยกรรมหญิง)</option>
+                <option value="IPD (กุมารเวชกรรม)">IPD (กุมารเวชกรรม)</option>
+                <option value="IPD (นรีเวชกรรม)">IPD (นรีเวชกรรม)</option>
+                <option value="IPD (จักษุ)">IPD (จักษุ)</option>
+                <option value="IPD (Stroke)">IPD (Stroke)</option>
+                <option value="IPD (ICU)">IPD (ICU)</option>
+                <option value="IPD (พิเศษ)">IPD (พิเศษ)</option>
+                <option value="คลินิกวิลาวัลย์">คลินิกวิลาวัลย์</option>
+                <option value="คลินิกไตเทียม">คลินิกไตเทียม</option>
+                <option value="other">อื่นๆ (ระบุ)</option>
+              </select>
+              <input type="text" id="deptOtherInput" class="hidden w-full border-b border-gray-400 focus:border-blue-600 outline-none text-sm p-2 bg-yellow-50" placeholder="ระบุชื่อหน่วยงาน...">
+          </select>
         </div>
         <div>
           <label class="block text-sm text-gray-600 mb-1">HN <span class="text-red-500">*</span></label>
