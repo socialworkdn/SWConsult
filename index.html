@@ -272,17 +272,28 @@
           <h2 class="font-semibold text-gray-700">ความต้องการเร่งด่วน (Urgency)</h2>
         </div>
         <div class="p-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <label class="flex items-center gap-3 p-3 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-400 transition">
-            <input type="radio" name="urgency" value="ไม่เร่งด่วน" class="accent-green-600 w-4 h-4">
-            <span class="text-sm font-medium">🟢 ไม่เร่งด่วน</span>
+          <label class="flex flex-col gap-2 p-4 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-400 hover:bg-green-50 transition has-[:checked]:border-green-500 has-[:checked]:bg-green-50">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="urgency" value="ไม่เร่งด่วน" class="accent-green-600 w-4 h-4">
+              <span class="font-semibold text-green-700">🟢 ไม่เร่งด่วน</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed pl-6">ผู้ป่วยมีปัญหาแต่ยังดูแลตัวเองได้ สามารถนัดติดตามได้ตามปกติ <span class="text-green-600 font-medium">ภายใน 7 วัน</span></p>
           </label>
-          <label class="flex items-center gap-3 p-3 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-yellow-400 transition">
-            <input type="radio" name="urgency" value="เร่งด่วน" class="accent-yellow-500 w-4 h-4">
-            <span class="text-sm font-medium">🟡 เร่งด่วน</span>
+
+          <label class="flex flex-col gap-2 p-4 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-yellow-400 hover:bg-yellow-50 transition has-[:checked]:border-yellow-500 has-[:checked]:bg-yellow-50">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="urgency" value="เร่งด่วน" class="accent-yellow-500 w-4 h-4">
+              <span class="font-semibold text-yellow-700">🟡 เร่งด่วน</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed pl-6">ปัญหากระทบต่อการรักษาหรือการดูแล ต้องการความช่วยเหลือ <span class="text-yellow-600 font-medium">ภายใน 24–48 ชั่วโมง</span></p>
           </label>
-          <label class="flex items-center gap-3 p-3 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-red-400 transition">
-            <input type="radio" name="urgency" value="วิกฤต" class="accent-red-600 w-4 h-4">
-            <span class="text-sm font-medium">🔴 วิกฤต</span>
+
+          <label class="flex flex-col gap-2 p-4 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-red-400 hover:bg-red-50 transition has-[:checked]:border-red-500 has-[:checked]:bg-red-50">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="urgency" value="วิกฤต" class="accent-red-600 w-4 h-4">
+              <span class="font-semibold text-red-700">🔴 วิกฤต</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed pl-6">เป็นอันตรายต่อชีวิตหรือความปลอดภัย เช่น ถูกทอดทิ้ง ไร้บ้าน ถูกทำร้าย ต้องดำเนินการ <span class="text-red-600 font-medium">ทันที</span></p>
           </label>
         </div>
       </div>
