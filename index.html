@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>แบบคัดกรองความเสี่ยงทางสังคม - รพ.สมเด็จพระสังฆราช</title> <link rel="icon" type="image/png" href="Logo-sw69.png">
+<title>แบบคัดกรองความเสี่ยงทางสังคม - รพ.สมเด็จพระสังฆราช</title>
+<link rel="icon" type="image/png" href="Logo-sw69.png">
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -18,19 +19,15 @@
 </head>
 <body class="bg-gray-50 min-h-screen">
 
-<!-- ───── CONFIG: แก้ URL ตรงนี้เมื่อ Deploy Apps Script แล้ว ───── -->
 <script>
-  // !! วางลิงก์ Web App URL ของ Apps Script ที่นี่ !!
   const API_URL = 'https://script.google.com/macros/s/AKfycbz6EL1Skx0S-kGUDGkAoQu40z4DEtGh_eidZPI962mJILE_HLSV4AoDcIa8KuxDLxhS/exec';
 </script>
-<!-- ─────────────────────────────────────────────────────────────── -->
 
 <!-- Header -->
 <div class="header-bg text-white shadow-lg sticky top-0 z-20">
   <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-3 min-w-0">
-      <img src="Logo-sw69.png"
-           alt="Logo" class="h-11 w-11 md:h-14 md:w-14 rounded-full bg-white p-1 object-contain shrink-0">
+      <img src="Logo-sw69.png" alt="Logo" class="h-11 w-11 md:h-14 md:w-14 rounded-full bg-white p-1 object-contain shrink-0">
       <div class="min-w-0">
         <h1 class="text-sm md:text-xl font-bold leading-tight truncate">ระบบคัดกรองความเสี่ยงทางสังคม</h1>
         <p class="text-xs opacity-80 truncate">กลุ่มงานสังคมสงเคราะห์ รพ.สมเด็จพระสังฆราช (อมฺพรมหาเถร)</p>
@@ -47,7 +44,7 @@
 <div class="container mx-auto max-w-3xl px-3 py-5 pb-28 md:pb-8">
   <form id="screeningForm" novalidate>
 
-    <!-- Section 1: ข้อมูลผู้ป่วย -->
+    <!-- Section 1 -->
     <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
       <div class="px-5 py-4 border-b border-gray-100">
         <h2 class="font-semibold text-gray-700 flex items-center gap-2">
@@ -56,38 +53,49 @@
         </h2>
       </div>
       <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- วันที่ประเมิน -->
         <div>
           <label class="block text-sm text-gray-600 mb-1">วันที่ประเมิน <span class="text-red-500">*</span></label>
           <input type="date" name="evalDate" id="evalDate" required
                  class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
         </div>
+
+        <!-- หน่วยงาน -->
         <div>
           <label class="block text-sm text-gray-600 mb-1">หน่วยงานที่ส่งปรึกษา <span class="text-red-500">*</span></label>
-          <select name="department" required
+          <select id="departmentSelect" name="department" required
+                  onchange="toggleOtherDept(this.value)"
                   class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none bg-white text-gray-800">
             <option value="">-- เลือกหน่วยงาน --</option>
             <option value="ER (อุบัติเหตุฉุกเฉิน)">ER (อุบัติเหตุฉุกเฉิน)</option>
-                <option value="OPD (Med)">OPD (Med)</option>
-                <option value="OPD (กุมาร)">OPD (กุมาร)</option>
-                <option value="OPD (จิตเวช)">OPD (จิตเวช)</option>
-                <option value="OPD (ออร์โธ)">OPD (ออร์โธ)</option>
-                <option value="IPD (อายุรกรรมชาย)">IPD (อายุรกรรมชาย)</option>
-                <option value="IPD (อายุรกรรมหญิง)">IPD (อายุรกรรมหญิง)</option>
-                <option value="IPD (ศัลยกรรมชาย)">IPD (ศัลยกรรมชาย)</option>
-                <option value="IPD (ศัลยกรรมหญิง)">IPD (ศัลยกรรมหญิง)</option>
-                <option value="IPD (กุมารเวชกรรม)">IPD (กุมารเวชกรรม)</option>
-                <option value="IPD (นรีเวชกรรม)">IPD (นรีเวชกรรม)</option>
-                <option value="IPD (จักษุ)">IPD (จักษุ)</option>
-                <option value="IPD (Stroke)">IPD (Stroke)</option>
-                <option value="IPD (ICU)">IPD (ICU)</option>
-                <option value="IPD (พิเศษ)">IPD (พิเศษ)</option>
-                <option value="คลินิกวิลาวัลย์">คลินิกวิลาวัลย์</option>
-                <option value="คลินิกไตเทียม">คลินิกไตเทียม</option>
-                <option value="other">อื่นๆ (ระบุ)</option>
-              </select>
-              <input type="text" id="deptOtherInput" class="hidden w-full border-b border-gray-400 focus:border-blue-600 outline-none text-sm p-2 bg-yellow-50" placeholder="ระบุชื่อหน่วยงาน...">
+            <option value="OPD (Med)">OPD (Med)</option>
+            <option value="OPD (กุมาร)">OPD (กุมาร)</option>
+            <option value="OPD (จิตเวช)">OPD (จิตเวช)</option>
+            <option value="OPD (ออร์โธ)">OPD (ออร์โธ)</option>
+            <option value="IPD (อายุรกรรมชาย)">IPD (อายุรกรรมชาย)</option>
+            <option value="IPD (อายุรกรรมหญิง)">IPD (อายุรกรรมหญิง)</option>
+            <option value="IPD (ศัลยกรรมชาย)">IPD (ศัลยกรรมชาย)</option>
+            <option value="IPD (ศัลยกรรมหญิง)">IPD (ศัลยกรรมหญิง)</option>
+            <option value="IPD (กุมารเวชกรรม)">IPD (กุมารเวชกรรม)</option>
+            <option value="IPD (นรีเวชกรรม)">IPD (นรีเวชกรรม)</option>
+            <option value="IPD (จักษุ)">IPD (จักษุ)</option>
+            <option value="IPD (Stroke)">IPD (Stroke)</option>
+            <option value="IPD (ICU)">IPD (ICU)</option>
+            <option value="IPD (พิเศษ)">IPD (พิเศษ)</option>
+            <option value="คลินิกวิลาวัลย์">คลินิกวิลาวัลย์</option>
+            <option value="คลินิกไตเทียม">คลินิกไตเทียม</option>
+            <option value="other">✏️ อื่นๆ (ระบุเอง)</option>
           </select>
+          <!-- ช่องพิมพ์ — โผล่เมื่อเลือก "อื่นๆ" -->
+          <div id="otherDeptBox" class="hidden mt-2 fade-in">
+            <input type="text" id="deptOtherInput"
+                   placeholder="พิมพ์ชื่อหน่วยงาน..."
+                   class="w-full border border-blue-300 bg-blue-50 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none text-sm">
+          </div>
         </div>
+
+        <!-- HN -->
         <div>
           <label class="block text-sm text-gray-600 mb-1">HN <span class="text-red-500">*</span></label>
           <input type="text" name="hn" inputmode="numeric" pattern="[0-9]*" required
@@ -95,12 +103,15 @@
                  class="w-full border border-yellow-300 bg-yellow-50 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
           <p class="text-xs text-gray-400 mt-1">กรอกเฉพาะตัวเลข</p>
         </div>
+
+        <!-- AN -->
         <div>
           <label class="block text-sm text-gray-600 mb-1">AN (ถ้ามี)</label>
           <input type="text" name="an" inputmode="numeric" pattern="[0-9]*"
                  placeholder="ตัวเลขเท่านั้น"
                  class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
         </div>
+
       </div>
     </div>
 
@@ -116,16 +127,14 @@
         <p class="text-sm text-gray-600 mb-4">ผลการคัดกรองพบว่าผู้ป่วยรายนี้:</p>
         <div class="grid grid-cols-2 gap-3">
           <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-400 transition">
-            <input type="radio" name="hasRisk" value="no" class="accent-green-600 w-4 h-4"
-                   onchange="toggleRisk(false)">
+            <input type="radio" name="hasRisk" value="no" class="accent-green-600 w-4 h-4" onchange="toggleRisk(false)">
             <div>
               <div class="font-semibold text-green-700">✅ ไม่พบความเสี่ยง</div>
               <div class="text-xs text-gray-500 mt-0.5">ไม่ต้องส่งต่อ</div>
             </div>
           </label>
           <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-red-400 transition">
-            <input type="radio" name="hasRisk" value="yes" class="accent-red-600 w-4 h-4"
-                   onchange="toggleRisk(true)">
+            <input type="radio" name="hasRisk" value="yes" class="accent-red-600 w-4 h-4" onchange="toggleRisk(true)">
             <div>
               <div class="font-semibold text-red-600">⚠️ พบความเสี่ยง</div>
               <div class="text-xs text-gray-500 mt-0.5">ส่งต่อนักสังคมสงเคราะห์</div>
@@ -150,8 +159,7 @@
           <!-- Risk 1 -->
           <div class="risk-card border-2 border-gray-200 rounded-xl p-4">
             <label class="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" name="risk1" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0"
-                     onchange="toggleDetail('detail1', this.checked)">
+              <input type="checkbox" name="risk1" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0" onchange="toggleDetail('detail1', this.checked)">
               <div class="font-medium text-gray-800">1. ผู้ป่วยมีปัญหาการใช้สิทธิการรักษาพยาบาล</div>
             </label>
             <div id="detail1" class="hidden mt-3 ml-7 fade-in">
@@ -163,8 +171,7 @@
                 <div class="flex items-center gap-2 text-sm">
                   <input type="checkbox" name="risk1_detail" value="อื่นๆ" class="accent-red-500" id="r1other">
                   <label for="r1other">อื่นๆ:</label>
-                  <input type="text" name="risk1_detail_other" placeholder="ระบุ..."
-                         class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
+                  <input type="text" name="risk1_detail_other" placeholder="ระบุ..." class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
                 </div>
               </div>
             </div>
@@ -173,8 +180,7 @@
           <!-- Risk 2 -->
           <div class="risk-card border-2 border-gray-200 rounded-xl p-4">
             <label class="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" name="risk2" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0"
-                     onchange="toggleDetail('detail2', this.checked)">
+              <input type="checkbox" name="risk2" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0" onchange="toggleDetail('detail2', this.checked)">
               <div class="font-medium text-gray-800">2. ผู้ป่วยไม่มีที่อยู่อาศัย</div>
             </label>
             <div id="detail2" class="hidden mt-3 ml-7 fade-in">
@@ -188,8 +194,7 @@
                 <div class="flex items-center gap-2 text-sm">
                   <input type="checkbox" name="risk2_detail" value="อื่นๆ" class="accent-red-500" id="r2other">
                   <label for="r2other">อื่นๆ:</label>
-                  <input type="text" name="risk2_detail_other" placeholder="ระบุ..."
-                         class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
+                  <input type="text" name="risk2_detail_other" placeholder="ระบุ..." class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
                 </div>
               </div>
             </div>
@@ -198,8 +203,7 @@
           <!-- Risk 3 -->
           <div class="risk-card border-2 border-gray-200 rounded-xl p-4">
             <label class="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" name="risk3" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0"
-                     onchange="toggleDetail('detail3', this.checked)">
+              <input type="checkbox" name="risk3" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0" onchange="toggleDetail('detail3', this.checked)">
               <div class="font-medium text-gray-800">3. ผู้ป่วยไม่มีญาติหรือผู้ดูแล</div>
             </label>
             <div id="detail3" class="hidden mt-3 ml-7 fade-in">
@@ -211,8 +215,7 @@
                 <div class="flex items-center gap-2 text-sm">
                   <input type="checkbox" name="risk3_detail" value="อื่นๆ" class="accent-red-500" id="r3other">
                   <label for="r3other">อื่นๆ:</label>
-                  <input type="text" name="risk3_detail_other" placeholder="ระบุ..."
-                         class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
+                  <input type="text" name="risk3_detail_other" placeholder="ระบุ..." class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
                 </div>
               </div>
             </div>
@@ -221,8 +224,7 @@
           <!-- Risk 4 -->
           <div class="risk-card border-2 border-gray-200 rounded-xl p-4">
             <label class="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" name="risk4" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0"
-                     onchange="toggleDetail('detail4', this.checked)">
+              <input type="checkbox" name="risk4" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0" onchange="toggleDetail('detail4', this.checked)">
               <div class="font-medium text-gray-800">4. ครอบครัวขาดความเข้าใจเรื่องโรค</div>
             </label>
             <div id="detail4" class="hidden mt-3 ml-7 fade-in">
@@ -233,8 +235,7 @@
                 <div class="flex items-center gap-2 text-sm">
                   <input type="checkbox" name="risk4_detail" value="อื่นๆ" class="accent-red-500" id="r4other">
                   <label for="r4other">อื่นๆ:</label>
-                  <input type="text" name="risk4_detail_other" placeholder="ระบุ..."
-                         class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
+                  <input type="text" name="risk4_detail_other" placeholder="ระบุ..." class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
                 </div>
               </div>
             </div>
@@ -243,8 +244,7 @@
           <!-- Risk 5 -->
           <div class="risk-card border-2 border-gray-200 rounded-xl p-4">
             <label class="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" name="risk5" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0"
-                     onchange="toggleDetail('detail5', this.checked)">
+              <input type="checkbox" name="risk5" value="1" class="mt-1 accent-red-600 w-4 h-4 shrink-0" onchange="toggleDetail('detail5', this.checked)">
               <div class="font-medium text-gray-800">5. ผู้ป่วยมีปัญหาด้านเศรษฐกิจ</div>
             </label>
             <div id="detail5" class="hidden mt-3 ml-7 fade-in">
@@ -255,8 +255,7 @@
                 <div class="flex items-center gap-2 text-sm">
                   <input type="checkbox" name="risk5_detail" value="อื่นๆ" class="accent-red-500" id="r5other">
                   <label for="r5other">อื่นๆ:</label>
-                  <input type="text" name="risk5_detail_other" placeholder="ระบุ..."
-                         class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
+                  <input type="text" name="risk5_detail_other" placeholder="ระบุ..." class="flex-1 border-b border-gray-300 px-1 text-sm outline-none focus:border-blue-500">
                 </div>
               </div>
             </div>
@@ -279,7 +278,6 @@
             </div>
             <p class="text-xs text-gray-500 leading-relaxed pl-6">ผู้ป่วยมีปัญหาแต่ยังดูแลตัวเองได้ สามารถนัดติดตามได้ตามปกติ <span class="text-green-600 font-medium">ภายใน 7 วัน</span></p>
           </label>
-
           <label class="flex flex-col gap-2 p-4 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-yellow-400 hover:bg-yellow-50 transition has-[:checked]:border-yellow-500 has-[:checked]:bg-yellow-50">
             <div class="flex items-center gap-2">
               <input type="radio" name="urgency" value="เร่งด่วน" class="accent-yellow-500 w-4 h-4">
@@ -287,7 +285,6 @@
             </div>
             <p class="text-xs text-gray-500 leading-relaxed pl-6">ปัญหากระทบต่อการรักษาหรือการดูแล ต้องการความช่วยเหลือ <span class="text-yellow-600 font-medium">ภายใน 24–48 ชั่วโมง</span></p>
           </label>
-
           <label class="flex flex-col gap-2 p-4 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-red-400 hover:bg-red-50 transition has-[:checked]:border-red-500 has-[:checked]:bg-red-50">
             <div class="flex items-center gap-2">
               <input type="radio" name="urgency" value="วิกฤต" class="accent-red-600 w-4 h-4">
@@ -319,17 +316,30 @@ document.querySelectorAll('input[name="hn"], input[name="an"]').forEach(el => {
   el.addEventListener('input', function() { this.value = this.value.replace(/\D/g, ''); });
 });
 
-// --- Toggle ---
+// --- Toggle หน่วยงานอื่นๆ ---
+function toggleOtherDept(val) {
+  const box   = document.getElementById('otherDeptBox');
+  const input = document.getElementById('deptOtherInput');
+  if (val === 'other') {
+    box.classList.remove('hidden');
+    input.focus();
+  } else {
+    box.classList.add('hidden');
+    input.value = '';
+  }
+}
+
+// --- Toggle ความเสี่ยง ---
 function toggleRisk(show) {
   const el = document.getElementById('riskDetailsContainer');
   if (show) { el.classList.remove('hidden'); el.classList.add('fade-in'); }
-  else { el.classList.add('hidden'); }
+  else       { el.classList.add('hidden'); }
 }
 
 function toggleDetail(id, show) {
   const el = document.getElementById(id);
   if (show) { el.classList.remove('hidden'); el.classList.add('fade-in'); }
-  else { el.classList.add('hidden'); }
+  else       { el.classList.add('hidden'); }
 }
 
 // --- Collect form data ---
@@ -337,23 +347,25 @@ function collectForm() {
   const fd  = new FormData(document.getElementById('screeningForm'));
   const obj = {};
 
-  // scalars
-  ['evalDate','department','hn','an','urgency'].forEach(k => {
-    obj[k] = fd.get(k) || '';
-  });
+  ['evalDate', 'hn', 'an', 'urgency'].forEach(k => { obj[k] = fd.get(k) || ''; });
 
-  // risk flags (checkbox "risk1"…"risk5")
+  // หน่วยงาน: ถ้าเลือก "other" ให้ใช้ค่าจากช่องพิมพ์
+  const deptSel = document.getElementById('departmentSelect').value;
+  if (deptSel === 'other') {
+    obj.department = (document.getElementById('deptOtherInput').value || '').trim();
+  } else {
+    obj.department = deptSel;
+  }
+
+  // risk flags + detail
   for (let i = 1; i <= 5; i++) {
     obj[`risk${i}`] = fd.get(`risk${i}`) ? true : false;
-
-    // รวม detail checkboxes + อื่นๆ text
     const details = fd.getAll(`risk${i}_detail`);
     const other   = (fd.get(`risk${i}_detail_other`) || '').trim();
     if (other && details.includes('อื่นๆ')) details.push(other);
     obj[`risk${i}_detail`] = details.filter(v => v !== 'อื่นๆ' && v !== '').join(', ');
   }
 
-  // hasRisk radio
   obj.hasRisk = fd.get('hasRisk');
   obj.action  = 'saveData';
   return obj;
@@ -364,25 +376,26 @@ document.getElementById('screeningForm').addEventListener('submit', async functi
   e.preventDefault();
   const data = collectForm();
 
-  // Client-side validation
-  if (!data.evalDate)    return Swal.fire('แจ้งเตือน','กรุณาระบุวันที่ประเมิน','warning');
-  if (!data.department)  return Swal.fire('แจ้งเตือน','กรุณาระบุหน่วยงาน','warning');
-  if (!data.hn)          return Swal.fire('แจ้งเตือน','กรุณาระบุ HN','warning');
-  if (!data.hasRisk)     return Swal.fire('แจ้งเตือน','กรุณาเลือกผลการประเมิน','warning');
+  if (!data.evalDate)   return Swal.fire('แจ้งเตือน','กรุณาระบุวันที่ประเมิน','warning');
+  if (!data.department) return Swal.fire('แจ้งเตือน','กรุณาเลือกหน่วยงาน','warning');
+  if (document.getElementById('departmentSelect').value === 'other' && !data.department)
+                        return Swal.fire('แจ้งเตือน','กรุณาพิมพ์ชื่อหน่วยงาน','warning');
+  if (!data.hn)         return Swal.fire('แจ้งเตือน','กรุณาระบุ HN','warning');
+  if (!data.hasRisk)    return Swal.fire('แจ้งเตือน','กรุณาเลือกผลการประเมิน','warning');
   if (data.hasRisk === 'yes') {
     const anyRisk = [1,2,3,4,5].some(i => data[`risk${i}`]);
     if (!anyRisk) return Swal.fire('แจ้งเตือน','กรุณาเลือกประเด็นปัญหาที่พบ','warning');
   }
 
   const btn = document.getElementById('btnSubmit');
-  btn.disabled = true;
+  btn.disabled    = true;
   btn.textContent = '⏳ กำลังบันทึก...';
 
   try {
-    const res = await fetch(API_URL, {
+    const res    = await fetch(API_URL, {
       method : 'POST',
       body   : JSON.stringify(data),
-      headers: { 'Content-Type': 'text/plain' }, // Apps Script ต้องการ text/plain เพื่อให้ doPost รับ
+      headers: { 'Content-Type': 'text/plain' },
     });
     const result = await res.json();
 
@@ -390,6 +403,7 @@ document.getElementById('screeningForm').addEventListener('submit', async functi
       await Swal.fire({ icon:'success', title:'บันทึกสำเร็จ!', text: result.message, timer:2000, showConfirmButton:false });
       document.getElementById('screeningForm').reset();
       document.getElementById('evalDate').valueAsDate = new Date();
+      document.getElementById('otherDeptBox').classList.add('hidden');
       toggleRisk(false);
     } else {
       Swal.fire('เกิดข้อผิดพลาด', result.message || 'ไม่ทราบสาเหตุ', 'error');
@@ -397,7 +411,7 @@ document.getElementById('screeningForm').addEventListener('submit', async functi
   } catch (err) {
     Swal.fire('เกิดข้อผิดพลาด', 'ไม่สามารถเชื่อมต่อ API ได้: ' + err.message, 'error');
   } finally {
-    btn.disabled = false;
+    btn.disabled    = false;
     btn.textContent = '✅ บันทึกข้อมูล';
   }
 });
