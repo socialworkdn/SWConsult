@@ -264,6 +264,30 @@
         </div>
       </div>
 
+      <!-- Section 2c: กลุ่มเป้าหมาย 18 กลุ่ม (ชุดเดียวกับ sw-service) -->
+      <details class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
+        <summary class="px-5 py-4 cursor-pointer font-semibold text-gray-700">กลุ่มเป้าหมาย (เลือกได้ข้อเดียว) <span id="groupCount" class="text-xs text-gray-400"></span></summary>
+        <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-2" id="groupBox">
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="1.ผู้ใช้บริการทั่วไป" class="accent-red-500"> 1.ผู้ใช้บริการทั่วไป</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="2.ผู้ป่วยทั่วไป" class="accent-red-500"> 2.ผู้ป่วยทั่วไป</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="3.ผู้ป่วยโรคเรื้อรัง" class="accent-red-500"> 3.ผู้ป่วยโรคเรื้อรัง</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="4.OSCC" class="accent-red-500"> 4.OSCC</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="5.ผู้ติดสารเสพติด" class="accent-red-500"> 5.ผู้ติดสารเสพติด</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="6.ผู้ป่วยประสบอุบัติเหตุจากการทำงาน" class="accent-red-500"> 6.ผู้ป่วยประสบอุบัติเหตุจากการทำงาน</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="7.คนพิการ" class="accent-red-500"> 7.คนพิการ</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="8.ผู้ป่วยจิตเวช" class="accent-red-500"> 8.ผู้ป่วยจิตเวช</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="9.ผู้ที่ได้รับบาดเจ็บจากการกระทำโดยประมาทของผู้อื่น" class="accent-red-500"> 9.ผู้ที่ได้รับบาดเจ็บจากการกระทำโดยประมาทของผู้อื่น</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="10.ผู้ติดเชื้อเอชไอวี/เอดส์" class="accent-red-500"> 10.ผู้ติดเชื้อเอชไอวี/เอดส์</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="11.ผู้ไม่มีหลักประกัน/มีปัญหาการใช้สิทธิ์" class="accent-red-500"> 11.ผู้ไม่มีหลักประกัน/มีปัญหาการใช้สิทธิ์</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="12.ผู้ป่วยมะเร็ง" class="accent-red-500"> 12.ผู้ป่วยมะเร็ง</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="13.ผู้ป่วยระยะประคับประครองและระยะท้าย" class="accent-red-500"> 13.ผู้ป่วยระยะประคับประครองและระยะท้าย</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="14.ผู้ประสบปัญหาวิกฤตจากภัยพิบัติ" class="accent-red-500"> 14.ผู้ประสบปัญหาวิกฤตจากภัยพิบัติ</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="15.ผู้ป่วยวัณโรค/วัณโรคดื้อยา" class="accent-red-500"> 15.ผู้ป่วยวัณโรค/วัณโรคดื้อยา</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="16.ผู้ป่วยโรคอุบัติใหม่" class="accent-red-500"> 16.ผู้ป่วยโรคอุบัติใหม่</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="17.ผู้ป่วยตั้งครรภ์ไม่พึงประสงค์" class="accent-red-500"> 17.ผู้ป่วยตั้งครรภ์ไม่พึงประสงค์</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="groups" value="18.ผู้ที่ได้รับผลกระทบจากการบริการด้านการแพทย์และสาธารณสุข" class="accent-red-500"> 18.ผู้ที่ได้รับผลกระทบจากการบริการด้านการแพทย์และสาธารณสุข</label>
+        </div>
+      </details>
       <!-- Section 3: Urgency -->
       <div class="bg-orange-50 border border-orange-200 rounded-xl shadow-md overflow-hidden mb-4">
         <div class="px-5 py-4 border-b border-orange-200 flex items-center gap-2">
@@ -329,6 +353,12 @@ function toggleOtherDept(val) {
   }
 }
 
+document.getElementById('groupBox').addEventListener('change', function(e) {
+  // เลือกกลุ่มเป้าหมายได้ข้อเดียว (ติ๊กข้อใหม่ ข้อเดิมจะถูกยกเลิก)
+  if (e.target.checked) this.querySelectorAll('input[name="groups"]').forEach(x => { if (x !== e.target) x.checked = false; });
+  const n = this.querySelectorAll('input:checked').length;
+  document.getElementById('groupCount').textContent = n ? '· เลือกแล้ว' : '';
+});
 // --- Toggle ความเสี่ยง ---
 function toggleRisk(show) {
   const el = document.getElementById('riskDetailsContainer');
@@ -366,6 +396,7 @@ function collectForm() {
     obj[`risk${i}_detail`] = details.filter(v => v !== 'อื่นๆ' && v !== '').join(', ');
   }
 
+  obj.groups = fd.getAll('groups');
   obj.hasRisk = fd.get('hasRisk');
   obj.action  = 'saveData';
   return obj;
@@ -405,6 +436,7 @@ document.getElementById('screeningForm').addEventListener('submit', async functi
       document.getElementById('evalDate').valueAsDate = new Date();
       document.getElementById('otherDeptBox').classList.add('hidden');
       toggleRisk(false);
+      document.getElementById('groupCount').textContent = '';
     } else {
       Swal.fire('เกิดข้อผิดพลาด', result.message || 'ไม่ทราบสาเหตุ', 'error');
     }
